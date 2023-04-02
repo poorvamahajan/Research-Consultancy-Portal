@@ -1,0 +1,343 @@
+
+<?php
+require_once 'config.php';
+ 
+
+
+if(ISSET($_POST['update'])){
+    try{
+        $name = $_GET['name'];
+        $pid = $_GET['pid'];
+        $value = $_POST['maintenance_mode'];
+        $remark = $_POST['remark'];
+        echo $pid;
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "UPDATE `pdfupload`SET `check` = '$value', `remark` = '$remark' WHERE `id` = '$id'";
+        $conn->exec($sql);
+        
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+    $conn = null;
+
+    echo "<script>alert('Succesfully updated an account!')</script>";
+    echo "<script>window.location='professor_check.php'</script>";
+}
+?>
+
+
+
+<?php  
+        session_start(); 
+         if(isset($_SESSION["pid"]))
+           {      
+            // echo "ADMIN::"; 
+                // echo '<u><h4> ADMIN:: '.$_SESSION["name"].'    </h4></u>'; 
+                // echo "<script type='text/javascript'>alert('Hello');</script>";
+                $myMessage= addslashes($_SESSION["pid"]);
+  echo "<script type='text/javascript'>alert(' Welcome $myMessage');</script>";
+  unset($_SESSION["myMessage"]);
+
+                
+           }  
+              ?>
+
+
+
+
+
+
+
+
+<?php  
+        session_start(); 
+         if(isset($_SESSION["pid"]) && )
+           {$query = "INSERT INTO pdfupload (investorname, investoremail,investorphoneno,details) VALUES(?,?,?,?)";
+   
+            $statement = $conn->prepare($query);
+           
+            // Loop all files
+            
+          
+                        $investorname = !empty($_POST['investorname']) ? trim($_POST['investorname']) : null;
+                       
+                        $investoremail = !empty($_POST['investoremail']) ? trim($_POST['investoremail']) : null;
+                        $investorphoneno = !empty($_POST['investorphoneno']) ? trim($_POST['investorphoneno']) : null;
+                        $details = !empty($_POST['details']) ? trim($_POST['details']) : null;
+                        // Execute query
+                        $statement->execute(
+                            array($investorname,$investoremail,$investorphoneno,$details));
+
+                
+           }  
+              ?>
+
+
+
+
+
+
+
+
+
+
+
+<table cellpadding="15" cellspacing="10" >
+			<tr rowspan="5">
+                <td style="padding:10px">  <label><?=$row['dateuploaded']?></label></td>
+     <!-- <div style="margin-left: 15px; border-left: 2px solid black;height: 500px;"></div> -->
+                
+
+			<td style="padding:10px"> 
+            <label>You Uploaded</label>
+			</td>
+			<td style="padding:10px">
+				<a href="downloadpdf.php?filename=<?php echo $filename;?>&f=<?php echo $row['filename'] ?>"><?=$row['filename']?></a>
+			</td>
+            
+             <td style="padding:10px; color:red;"> <label>is <?=$row['check']?></label> 
+             
+             
+            <td style="padding:10px"> <label>REMARK:  <?=$row['remark']?></label>    
+            </td>
+        
+		
+			<?php
+        $query1=$conn->query("select * from professor WHERE `pid` = '$pid'" );
+        while($row=$query1->fetch())
+        {  
+            ?> 
+            <td style="padding:10px"><a href="user_professordetails.php?pid=<?php echo $pid?>"> <label> Checked by Prof.<?=$row['name']?></label> </a>   </td></tr>
+            <?php
+            }
+            }
+            ?>
+            </td>
+        </tr>
+        
+            
+		</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        main.php
+        <?php
+include "config.php";
+if(isset($_POST['Ask'])){
+    header("location:index.php");
+    exit();
+}
+if(isset($_POST['btn'])){
+    header("location:userRegister.php");
+    exit();
+}
+?>
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- <link rel="stylesheet" href="register.css"> -->
+        <link rel="stylesheet" href="new.css">
+        <link rel="stylesheet" href="askme.css">
+        <title>How To Write Research Paper</title>
+    </head>
+  <body style="background-image: url('upload/rc2.jpg');
+  background-repeat: no-repeat;
+  background-size: 750px 500px;
+  background-position: 700px 160px;">
+  <!-- background-size: 400px 500px; background-position: 1040px 160px;  -->
+  <div style="color:white;" class="navbar">
+            
+            <ul>
+                <div class="dropdown">
+                    <a class="dropbtn">
+                <div class="wrap">
+                    <div class="menu"></div>
+                    <div class="menu"></div>
+                    <div class="menu"></div>
+                </a>
+            
+                <div class="dropdown-content">
+                    <a href="userlogin.php">User</a>
+                    <a href="professorlogin.php">Professor</a>
+                    <a href="adminlogin.php">Admin</a>
+                </div>
+            </div>
+        </div>
+        
+                <div  class="topnav">
+                    <li><a href="main.html">Home</a></li>
+                    <li><a href="howToWriteResearchPaper.html">How To Write Research Paper</a></li>
+                    <li><a href="investorregister.php">Investor Form</a></li>
+                    <li><a href="adminlogin.php">Admin</a></li>
+                    <li>   </li>
+            <li>  
+                </div>
+            </ul>
+        </div>
+    </div>
+    
+    <form   action="#" method="post" enctype='multipart/form-data' class="login-form">
+    <div class="para" >
+      Want to write some amazing </br>
+      Research Paper?</br>
+<input type="submit" style="
+  text-transform: uppercase;
+  outline: 0;
+  background-color: white;
+  background-image: linear-gradient(45deg,#328f8a,#08ac4b);
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: linear-gradient(45deg,#328f8a,#08ac4b);
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  margin-top:-10px;
+  margin-bottom: -15px; width:200px" value="Get Started?" name="btn">  </br>
+
+ <a href="professorregister.php" style="font-size:14px; margin-top:-10px; color:black;">Nope, I'm a Professor</a>     
+    </div>
+
+   
+   <div class="login-page">
+      <div class="form">
+        <div class="login">
+          <div class="login-header">
+         
+            
+          </div>
+        </div>
+        
+        
+        
+         
+         
+      </div>
+       
+    </div>
+    <!-- <button class="btn btn--basic">Basic</button> -->
+
+    <!-- style=" position: fixed; border-radius: 50%; margin-left: 0px; background-image: linear-gradient(45deg,#328f8a,#08ac4b); border: 0px; width: 50px; height: 50px;" -->
+    <div style="margin-top: 550px; margin-right: 200px; margin-left: 1400px; position: sticky;" id="mybutton">
+        <button style="position: fixed;border-radius:50%;" id="Ask" name="Ask" class="btn btn--basic"  class="feedback">Ask</button>
+        </div>
+
+
+        
+
+
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+userlogin.php
+<?php
+
+session_start();
+
+include_once "config.php";
+if(isset($_POST['register'])) {
+
+    $query = "SELECT * FROM user WHERE email = :email";  
+    $statement = $conn->prepare($query);  
+    $statement->execute(  
+         array(  
+              'email'     =>     $_POST["email"] 
+         )  
+    );  
+    $count = $statement->rowCount();  
+    if($count > 0)  
+    {  
+        echo "<script>alert('User Already Exists!')</script>";
+        echo "<script>window.location='userregister.php'</script>";
+    }
+    else{
+
+    // Count total files
+    $countfiles = count($_FILES['files']['name']);
+    if(is_countable($countfiles))$countfiles = Array();
+    
+    // Prepared statement
+    $query = "INSERT INTO user (name, password, email,imagename,image) VALUES(?,?,?,?,?)";
+   
+    $statement = $conn->prepare($query);
+   
+    // Loop all files
+    for($i = 0; $i < $countfiles; $i++) {
+   
+        // File name
+        $filename = $_FILES['files']['name'][$i];
+       
+        // Location
+        $target_file = 'upload/'.$filename;
+       
+        // file extension
+        $file_extension = pathinfo(
+            $target_file, PATHINFO_EXTENSION);
+              
+        $file_extension = strtolower($file_extension);
+       
+        // Valid image extension
+        $valid_extension = array("png","jpeg","jpg");
+       
+        if(in_array($file_extension, $valid_extension)) {
+   
+            // Upload file
+            if(move_uploaded_file(
+                $_FILES['files']['tmp_name'][$i],
+                $target_file)
+            ) {
+  
+                $name = !empty($_POST['name']) ? trim($_POST['name']) : null;
+                $password = !empty($_POST['password']) ? trim($_POST['password']) : null;
+                $email = !empty($_POST['email']) ? trim($_POST['email']) : null;
+                // Execute query
+                $statement->execute(
+                    array($name,$password,$email,$filename,$target_file));
+                    
+                    echo "<script>alert('Succesfully Registered!')</script>";
+                    echo "<script>window.location='userlogin.php'</script>";    
+
+            }
+        }
+        }
+    }
+}
+   
+    
+    ?>

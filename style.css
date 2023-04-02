@@ -1,0 +1,71 @@
+nav ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size:20px;
+}
+
+nav li {
+    margin: 0;
+    padding: 0;
+    float: left;
+    position: relative;
+}
+nav a {
+    padding: 10px 25px;
+    display: block;
+    background: transparent;
+    font-family: 'Tahoma';
+    text-transform: uppercase;
+    font-size: 20px;
+    /* font-weight: bold; */
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    -webkit-transition: all .25s ease;
+    -moz-transition: all .25s ease;
+    -ms-transition: all .25s ease;
+    -o-transition: all .25s ease;
+    transition: all .25s ease;
+}
+nav li:hover a {
+    font-weight: lighter;
+    color:black;
+    font-size: 18px;
+}
+nav li ul {
+    width: auto;
+    float: left;
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    top: 42px;
+    z-index: 1;
+    opacity: 0;
+    -webkit-transition: all .25s ease;
+    -moz-transition: all .25s ease;
+    -ms-transition: all .25s ease;
+    -o-transition: all .25s ease;
+    transition: all .25s ease;
+}
+
+nav li:hover ul {
+    visibility: visible;
+    opacity: 1;
+    
+}
+nav li ul li {
+    width: 100%;
+}
+
+nav li ul li a {
+    width: 100%;
+    text-align: left;
+}
+
+nav li ul a:hover {
+    /* background-color: grey; */
+    font-weight: lighter;
+
+}

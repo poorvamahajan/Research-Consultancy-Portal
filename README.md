@@ -18,6 +18,6 @@ Software requirements
 Languages
 •	Php(PDO), HTML, CSS3, Javascript
 
-•	Database
-MYSQL
+Database
+• MYSQL
 
